@@ -1,4 +1,13 @@
 def quick_sort(arr: list) -> list:
+    """
+    https://en.wikipedia.org/wiki/Quicksort
+    
+    Time complexity:
+        O(n*logn)
+        
+    Space complexity:
+        O(logn)
+    """
     if len(arr) <= 1:
         return arr
     

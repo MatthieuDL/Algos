@@ -1,4 +1,13 @@
 def binary_search(arr: list, num: int) -> int:   
+    """
+    https://en.wikipedia.org/wiki/Binary_search
+    
+    Time complexity:
+        O(logn)
+        
+    Space complexity:
+        O(1)
+    """
     head = 0
     tail = len(arr) - 1
     

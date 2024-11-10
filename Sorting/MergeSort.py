@@ -1,4 +1,13 @@
 def merge_sort(array):
+    """
+    https://en.wikipedia.org/wiki/Mergesort
+    
+    Time complexity:
+        O(n*logn)
+        
+    Space complexity:
+        O(n)
+    """
     if len(array) > 1:
         middle = len(array)//2
         l1 = array[:middle]
