@@ -1,13 +1,17 @@
 [tool.poetry]
 name = "algos"
 version = "0.1.0"
-description = ""
-authors = ["Matthieu-dl <matthieu.de.langhe1@gmail.com>"]
+description = "Comprehensive python package to learn and analyse fundamental algorithms and datastructures."
+authors = [
+    "Matthieu-dl <matthieu.de.langhe1@gmail.com>",
+    "Cascoopman <cascoopman@hotmail.com>"
+    ]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-
+matplotlib= "3.8.0"
+numpy= "1.26.4"
 
 [build-system]
 requires = ["poetry-core"]
