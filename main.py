@@ -15,6 +15,7 @@ def main() -> None:
     
     sizes = [int(1000*x) for x in range(1,2*10,2)]
     
+    # TODO: add graph initializers and 'traverse function' performance metrics
     performance_data = analyze_functions_performance(functions, sizes, plot_graph=True)
     
     print(json.dumps(performance_data, indent=4))
