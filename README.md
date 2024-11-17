@@ -1,8 +1,13 @@
 # Fundamental Data Structures and Algorithms
-
-This document provides a list of essential data structures and algorithms, forming a comprehensive base for software engineering, data-intensive applications, and computer science problem-solving.
+This is a collaborative repo containing all the fundamental data structures and algorithms. The goal is to create an environment to learn and experiment with all the essential data structures and algorithms.
 
 ---
+
+## Overview
+
+The following is a list of all the essential data structures and algorithms making up a comprehensive base for software engineering, data-intensive applications, and computer science problem-solving.
+
+If you want to contribute to this repository, the list can be seen as a to-do list!
 
 ## Data Structures
 
