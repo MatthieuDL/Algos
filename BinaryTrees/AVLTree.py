@@ -1,7 +1,4 @@
-# AVL Tree is one of the datastructures that can be used as a self balancing binary tree
-# https://www.youtube.com/watch?v=DB1HFCEdLxA
-
-class Node:
+class Node:   
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -9,6 +6,15 @@ class Node:
         self.height = 1
 
 class AVL:
+    """
+    an AVL Tree is one of the datastructures that 
+    can be used as a self balancing binary tree.
+    
+    https://en.wikipedia.org/wiki/AVL_tree
+    
+    https://www.youtube.com/watch?v=DB1HFCEdLxA
+    """
+    
     def __init__(self):
         self.root = None
     
@@ -21,7 +27,10 @@ class AVL:
         return self.get_height(node.left) - self.get_height(node.right)
     
     def rotate_left(self, a):
-    #O(1)
+        """
+        Time complexity: 
+            O(1)
+        """
         b = a.right
         t2 = b.left
 
@@ -34,7 +43,10 @@ class AVL:
         return b
 
     def rotate_right(self, a):
-    #O(1)
+        """
+        Time complexity: 
+            O(1)
+        """
         b = a.left
         t2 = b.right
 
@@ -47,13 +59,20 @@ class AVL:
         return b
 
     def find_smallest_node(self, node):
+        """
+        Find the in-order successor (node with smallest value 
+        that is larger than the value of the current node).
+        """ 
         temp = node
         while temp.left:
             temp = temp.left
         return temp
 
     def search(self, val):
-    # O(log n) where n = number nodes in AVL tree
+        """
+        Time complexity: 
+            O(log n) where n = number nodes in AVL tree
+        """
         n = self.root
         while n is not None or n.value != val:
             if val < n.value:
@@ -63,7 +82,9 @@ class AVL:
         return n
     
     def insert(self, node, val):
-    #https://www.youtube.com/watch?v=JPI-DPizQYk
+        """
+        https://www.youtube.com/watch?v=JPI-DPizQYk
+        """
         if not node:
             return Node(val)
         elif val < node.value:
@@ -82,13 +103,15 @@ class AVL:
         elif bf > 1 and val > node.left.value:
             node.left = self.rotate_left(node.left)
             return self.rotate_right(node)
-        elif bf < -1 and val < node.rigt.value:
+        elif bf < -1 and val < node.right.value:
             node.right = self.rotate_right(node.right)
             return self.rotate_left(node)
         return node
 
     def delete(self, node, val):
-    # https://www.youtube.com/watch?v=PBkXmhiCP1M
+        """
+        https://www.youtube.com/watch?v=PBkXmhiCP1M
+        """
         if not node:
             return node
         elif val > node.value:
@@ -105,7 +128,6 @@ class AVL:
                 node = None
                 return temp
             
-            # find inorder successor (node with smallest value that is larger than the value of this node)
             temp = self.find_smallest_node(node.right)
             node.value = temp.value
             node.right = self.delete(node.right, temp.value)
