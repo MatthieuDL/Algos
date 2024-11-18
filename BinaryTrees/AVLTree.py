@@ -74,7 +74,7 @@ class AVL:
             O(log n) where n = number nodes in AVL tree
         """
         n = self.root
-        while n is not None or n.value != val:
+        while n is not None and n.value != val:
             if val < n.value:
                 n = n.left
             else:
@@ -132,11 +132,11 @@ class AVL:
             node.value = temp.value
             node.right = self.delete(node.right, temp.value)
 
-        node.height = 1 + max(self.height(node.left), self.height(node.right))
-        bf = self.height(node.left) - self.height(node.right)
+        node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
+        bf = self.get_height(node.left) - self.get_height(node.right)
 
-        bf_l = self.height(node.left.left) - self.height(node.left.right)
-        bf_r = self.height(node.right.left) - self.height(node.right.right)
+        bf_l = self.get_height(node.left.left) - self.get_height(node.left.right)
+        bf_r = self.get_height(node.right.left) - self.get_height(node.right.right)
 
         if bf > 1 and bf_l >= 0:
             return self.rotate_right(node)
