@@ -1,4 +1,4 @@
-# Fundamental Data Structures and Algorithms
+# Fundamental Data Structures and Algorithms 🧑‍💻
 This is a collaborative repo containing all the fundamental data structures and algorithms. The goal is to create an environment to learn and experiment with all the essential data structures and algorithms.
 
 ---
