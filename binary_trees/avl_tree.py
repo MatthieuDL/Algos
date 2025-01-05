@@ -1,4 +1,8 @@
-class Node:   
+"""This is the AVL tree module (named after Adelson-Velsky and Landis)"""
+class Node: # pylint: disable=R0903
+    """
+    A node is the smallest component in the AVL tree.
+    """
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -18,15 +22,15 @@ class AVL:
     def __init__(self):
         self.root = None
 
-    def get_height(self, node):
+    def get_height(self, node): # pylint: disable=C0116
         if not node:
             return 0
         return node.height
 
-    def reset_height(self, node):
+    def reset_height(self, node): # pylint: disable=C0116
         node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
 
-    def balance(self, node):
+    def balance(self, node): # pylint: disable=C0116
         return self.get_height(node.left) - self.get_height(node.right)
 
     def rotate_left(self, a):
@@ -99,7 +103,6 @@ class AVL:
 
         bf = self.balance(node)
 
-        #TODO: Add some explanations here?
         if bf > 1 and val < node.left.value:
             return self.rotate_right(node)
         if bf < -1 and val > node.right.value:
@@ -143,7 +146,6 @@ class AVL:
         bf_l = self.balance(node.left)
         bf_r = self.balance(node.right)
 
-        # TODO: Add some explanations here?
         if bf > 1 and bf_l >= 0:
             return self.rotate_right(node)
         if bf < -1 and bf_r <= 0:
