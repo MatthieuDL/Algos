@@ -65,10 +65,10 @@ class AVL:
 
         return b
 
-    def find_next_smallest_node(self, node):
+    def find_smallest_node(self, node):
         """
-        Find the node with smallest value that is 
-        larger than the value of the current node.
+        Find the in-order successor (node with smallest value 
+        that is larger than the value of the current node).
         """
         temp = node
         while temp.left:
@@ -135,7 +135,7 @@ class AVL:
                 node = None
                 return temp
 
-            temp = self.find_next_smallest_node(node.right)
+            temp = self.find_smallest_node(node.right)
             node.value = temp.value
             node.right = self.delete(node.right, temp.value)
 
