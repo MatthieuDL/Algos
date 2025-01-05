@@ -1,4 +1,8 @@
-class Node:   
+"""This is the AVL tree module (named after Adelson-Velsky and Landis)"""
+class Node: # pylint: disable=R0903
+    """
+    A node is the smallest component in the AVL tree.
+    """
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -14,18 +18,21 @@ class AVL:
     
     https://www.youtube.com/watch?v=DB1HFCEdLxA
     """
-    
+
     def __init__(self):
         self.root = None
-    
-    def get_height(self, node):
+
+    def get_height(self, node): # pylint: disable=C0116
         if not node:
             return 0
         return node.height
 
-    def balance(self, node):
+    def reset_height(self, node): # pylint: disable=C0116
+        node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
+
+    def balance(self, node): # pylint: disable=C0116
         return self.get_height(node.left) - self.get_height(node.right)
-    
+
     def rotate_left(self, a):
         """
         Time complexity: 
@@ -36,9 +43,9 @@ class AVL:
 
         b.left = a
         a.right = t2
-        
-        a.height = 1 + max(self.get_height(a.left), self.get_height(a.right))
-        b.height = 1 + max(self.get_height(b.left), self.get_height(b.right))
+
+        self.reset_height(a)
+        self.reset_height(b)
 
         return b
 
@@ -53,8 +60,8 @@ class AVL:
         b.right = a
         a.left = t2
 
-        a.height = 1 + max(self.get_height(a.left), self.get_height(a.right))
-        b.height = 1 + max(self.get_height(b.left), self.get_height(b.right))
+        self.reset_height(a)
+        self.reset_height(b)
 
         return b
 
@@ -62,7 +69,7 @@ class AVL:
         """
         Find the in-order successor (node with smallest value 
         that is larger than the value of the current node).
-        """ 
+        """
         temp = node
         while temp.left:
             temp = temp.left
@@ -80,30 +87,30 @@ class AVL:
             else:
                 n = n.right
         return n
-    
+
     def insert(self, node, val):
         """
         https://www.youtube.com/watch?v=JPI-DPizQYk
         """
         if not node:
             return Node(val)
-        elif val < node.value:
+        if val < node.value:
             node.left = self.insert(node.left, val)
         else:
             node.right = self.insert(node.right, val)
-        
-        node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
 
-        bf = self.get_height(node.left) - self.get_height(node.right)
+        self.reset_height(node)
+
+        bf = self.balance(node)
 
         if bf > 1 and val < node.left.value:
             return self.rotate_right(node)
-        elif bf < -1 and val > node.right.value:
+        if bf < -1 and val > node.right.value:
             return self.rotate_left(node)
-        elif bf > 1 and val > node.left.value:
+        if bf > 1 and val > node.left.value:
             node.left = self.rotate_left(node.left)
             return self.rotate_right(node)
-        elif bf < -1 and val < node.right.value:
+        if bf < -1 and val < node.right.value:
             node.right = self.rotate_right(node.right)
             return self.rotate_left(node)
         return node
@@ -114,7 +121,7 @@ class AVL:
         """
         if not node:
             return node
-        elif val > node.value:
+        if val > node.value:
             node.right = self.delete(node.right, val)
         elif val < node.value:
             node.left = self.delete(node.left, val)
@@ -123,20 +130,21 @@ class AVL:
                 temp = node.left
                 node = None
                 return temp
-            elif not node.left:
+            if not node.left:
                 temp = node.right
                 node = None
                 return temp
-            
+
             temp = self.find_smallest_node(node.right)
             node.value = temp.value
             node.right = self.delete(node.right, temp.value)
 
-        node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
-        bf = self.get_height(node.left) - self.get_height(node.right)
+        self.reset_height(node)
 
-        bf_l = self.get_height(node.left.left) - self.get_height(node.left.right)
-        bf_r = self.get_height(node.right.left) - self.get_height(node.right.right)
+        bf = self.balance(node)
+
+        bf_l = self.balance(node.left)
+        bf_r = self.balance(node.right)
 
         if bf > 1 and bf_l >= 0:
             return self.rotate_right(node)
@@ -148,5 +156,5 @@ class AVL:
         if bf < -1 and bf_r > 0:
             node.right = self.rotate_right(node.right)
             return self.rotate_left(node)
-            
+
         return node
