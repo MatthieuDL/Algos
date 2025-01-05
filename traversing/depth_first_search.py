@@ -1,3 +1,6 @@
+"""Module including all BFS algorithms"""
+
+
 def depth_first_search(graph, node, target_node, visited = None, path = None):
     """
     https://en.wikipedia.org/wiki/Depth-first_search
@@ -10,18 +13,18 @@ def depth_first_search(graph, node, target_node, visited = None, path = None):
         
     with V the vertices and E the edges
     """
-    
+
     if visited is None:
         visited = set()
     if path is None:
         path = []
-        
+
     visited.add(node)
     path.append(node)
-    
+
     if node == target_node:
         return path
-    
+
     for neighbor in graph[node]:
         if neighbor not in visited:
             result = depth_first_search(
@@ -29,10 +32,11 @@ def depth_first_search(graph, node, target_node, visited = None, path = None):
                 )
             if result:
                 return result
-    
+
     path.pop()
     return None
-        
+
+
 def iterative_deepening_dfs(graph, node, target_node, max_depth):
     """
     https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search
@@ -44,34 +48,35 @@ def iterative_deepening_dfs(graph, node, target_node, max_depth):
         O(d)
         
     with b the branching factor and d the depth
-    """    
-    
+    """
+
     for depth in range(1, max_depth+1):
         visited = set()
         path = []
-        
+
         if _limited_dfs(graph, node, target_node, depth, visited, path):
             return path
-    
+
     return None
-            
+
+
 def _limited_dfs(graph, node, target_node, depth, visited, path):
     """ 
     Helper function for iterative_deepening_dfs()
     """
     if depth == 0:
         return False
-    
+
     visited.add(node)
     path.append(node)
-    
+
     if node == target_node:
         return True
-    
+
     for neighbor in graph[node]:
         if neighbor not in visited:
             if _limited_dfs(graph, neighbor, target_node, depth - 1, visited, path):
                 return True
-            
+
     path.pop()
     return False
