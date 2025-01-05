@@ -1,7 +1,6 @@
 """Module including all DFS algorithms"""
 
-
-def depth_first_search(graph, node, target_node, visited = None, path = None):
+def depth_first_search(graph, start_node, target_node, visited = None, path = None):
     """
     https://en.wikipedia.org/wiki/Depth-first_search
     
@@ -19,13 +18,13 @@ def depth_first_search(graph, node, target_node, visited = None, path = None):
     if path is None:
         path = []
 
-    visited.add(node)
-    path.append(node)
+    visited.add(start_node)
+    path.append(start_node)
 
-    if node == target_node:
+    if start_node == target_node:
         return path
 
-    for neighbor in graph[node]:
+    for neighbor in graph[start_node]:
         if neighbor not in visited:
             result = depth_first_search(
                 graph, neighbor, target_node, visited, path
@@ -37,7 +36,7 @@ def depth_first_search(graph, node, target_node, visited = None, path = None):
     return None
 
 
-def iterative_deepening_dfs(graph, node, target_node, max_depth):
+def iterative_deepening_dfs(graph, node, target_node, max_depth = 1):
     """
     https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search
     
@@ -60,7 +59,7 @@ def iterative_deepening_dfs(graph, node, target_node, max_depth):
     return None
 
 
-def _limited_dfs(graph, node, target_node, depth, visited, path):
+def _limited_dfs(graph, node, target_node, depth, visited, path): # pylint: disable=R0913
     """ 
     Helper function for iterative_deepening_dfs()
     """
