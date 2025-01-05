@@ -1,4 +1,4 @@
-"""Module including all BFS algorithms"""
+"""Module including all DFS algorithms"""
 
 
 def depth_first_search(graph, node, target_node, visited = None, path = None):
