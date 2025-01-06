@@ -8,6 +8,7 @@ from sorting.quick_sort import quick_sort
 from searching.binary_search import binary_search
 from traversing.breadth_first_search import breadth_first_search
 from traversing.depth_first_search import depth_first_search, iterative_deepening_dfs
+from traversing.dijkstra import dijkstra
 
 def run_experiments() -> None:
     """
@@ -19,7 +20,8 @@ def run_experiments() -> None:
         binary_search,
         breadth_first_search,
         depth_first_search,
-        iterative_deepening_dfs
+        iterative_deepening_dfs,
+        dijkstra,
         ]
 
     sizes = [int(1000*x) for x in range(1,2*10,2)]
