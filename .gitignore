@@ -3,3 +3,6 @@
 
 # Python caches
 __pycache__
+
+# Poetry
+poetry.lock

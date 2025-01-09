@@ -1,3 +1,5 @@
+"""This module holds merge sort implementations"""
+
 def merge_sort(array):
     """
     https://en.wikipedia.org/wiki/Mergesort
@@ -14,10 +16,11 @@ def merge_sort(array):
         l2 = array[middle:]
         merge_sort(l1)
         merge_sort(l2)
-        array[:] = merge(l1, l2)
+        array[:] = _merge(l1, l2)
     return array
-    
-def merge(l1, l2):
+
+
+def _merge(l1, l2):
     i, i1, i2 = 0, 0, 0
     result = []
     while i < len(l1)+len(l2):
